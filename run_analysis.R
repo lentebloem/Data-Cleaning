@@ -39,12 +39,11 @@ combined <- combined[, meanstdcols] # Remove unuseful columns
 combined$activity <- factor(combined$activity, labels=c("Walking",
                                                         "Walking Upstairs", 
                                                         "Walking Downstairs", 
-                                                        "Sitting", 
+                                                        "Sitting",  
                                                         "Standing", 
                                                         "Laying"))
 
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 melted <- melt(combined, id=c("subjectID","activity"))
 tidy <- dcast(melted, subjectID+activity ~ variable, mean)
-write.csv(tidy, "tidy.csv", row.names=FALSE)
-
+write.table(tidy, "tidy_data.txt", row.names=FALSE)
